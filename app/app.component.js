@@ -1,7 +1,6 @@
-(function (app) {
-
-    var NameService = function () {
-    };
+(function () {
+    function NameService() {
+    }
 
     NameService.prototype.greeting = function () {
         return 'Edward Tkachuk';
@@ -29,21 +28,20 @@
             }
         });
 
-    app.AppComponent =
-        ng.core.Component({
+    var app = ng.core
+        .Component({
             selector: 'my-app',
             template: '<h1>Hello Angular 2!</h1>' +
             '<footer></footer>' +
             '<my-name></my-name>',
             directives: [Footer, MyName]
         })
-            .Class({
-                constructor: function () {
-                }
-            });
+        .Class({
+            constructor: function () {
+            }
+        });
 
     document.addEventListener('DOMContentLoaded', function () {
-        ng.platform.browser.bootstrap(app.AppComponent);
+        ng.platform.browser.bootstrap(app);
     });
-
-})(window.app || (window.app = {}));
+})();
