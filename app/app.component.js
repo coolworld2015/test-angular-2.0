@@ -1,6 +1,6 @@
 (function () {
-    function NameService() {
-    }
+    var NameService = function() {
+    };
 
     NameService.prototype.greeting = function () {
         return 'Edward Tkachuk';
