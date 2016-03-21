@@ -42,7 +42,7 @@
             selector: 'heroes',
             providers: [HeroService],
             template: '<table>' +
-            '<tr *ngFor="#hero of heroes" (click)="onSelect(hero)">' +
+            '<tr *ngFor="#hero of heroes" (click)="onClick(hero)">' +
             '<td>{{hero.id}}</td>' +
             '<td>{{hero.name}}</td>' +
             '</tr>' +
@@ -51,6 +51,9 @@
         .Class({
             constructor: [HeroService, function (service) {
                 this.heroes = service.getHeroes();
+                this.onClick = function (hero) {
+                    console.log(hero.name);
+                }
             }]
         });
 
