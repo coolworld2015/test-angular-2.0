@@ -61,8 +61,17 @@
     var Index = ng.core
         .Component({
             selector: 'index',
-            //directives: [RouterOutlet, RouterLink],
             template: '<b>Index Component</b>'
+        })
+        .Class({
+            constructor: function () {
+            }
+        });
+
+    var Home = ng.core
+        .Component({
+            selector: 'home',
+            template: '<b>Home Component</b>'
         })
         .Class({
             constructor: function () {
@@ -72,22 +81,30 @@
     var app = ng.core
         .Component({
             selector: 'my-app',
-            directives: [Heroes, MyName],
+            directives: [MyName, Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
             template: '<h1>Hello Angular 2 !!!</h1>' +
-            '<heroes></heroes><br>' +
-                //'<ul>' +
-                //'<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
-                //'<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
-                //'</ul>' +
-            '<router-outlet></router-outlet>' +
+             '<heroes></heroes><br>' +
+            //'<ul>' +
+            //'<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
+            //'<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
+            //'</ul>' +
+            //'<x-router-outlet></x-router-outlet>' +
             '<my-name></my-name>'
         })
+        //.Class({
+        //    constructor: [ng.router.Router, function (router) {
+        //        router.config([
+        //            {path: '/index', component: Index, name: 'Index'},
+        //            {path: '/home', component: Home, name: 'Home'}
+        //        ])
+        //    }]
+        //});
         .Class({
             constructor: function () {
             }
         });
 
     document.addEventListener('DOMContentLoaded', function () {
-        ng.platform.browser.bootstrap(app);
+        ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
     });
 })();
