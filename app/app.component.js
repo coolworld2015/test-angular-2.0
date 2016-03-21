@@ -37,11 +37,16 @@
             }]
         });
 
-    var Footer = ng.core
+    var Heroes = ng.core
         .Component({
-            selector: 'footer',
+            selector: 'heroes',
             providers: [HeroService],
-            template: '{{heroes}}<br><br>'
+            template: '<table>' +
+            '<tr *ngFor="#hero of heroes" (click)="onSelect(hero)">' +
+            '<td>{{hero.id}}</td>' +
+            '<td>{{hero.name}}</td>' +
+            '</tr>' +
+            '</table>'
         })
         .Class({
             constructor: [HeroService, function (service) {
@@ -52,9 +57,9 @@
     var app = ng.core
         .Component({
             selector: 'my-app',
-            directives: [Footer, MyName],
+            directives: [Heroes, MyName],
             template: '<h1>Hello Angular 2 !!!</h1>' +
-            '<footer></footer>' +
+            '<heroes></heroes><br>' +
             '<my-name></my-name>'
         })
         .Class({
