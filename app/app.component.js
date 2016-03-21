@@ -1,9 +1,28 @@
 (function () {
-    var NameService = function() {
+    var NameService = function () {
     };
 
     NameService.prototype.greeting = function () {
-        return 'Edward Tkachuk';
+        return 'Eduard Tkachuk';
+    };
+
+    var HeroService = function () {
+        this.heroes = [
+            {"id": 11, "name": "Mr. Nice"},
+            {"id": 12, "name": "Narco"},
+            {"id": 13, "name": "Bombasto"},
+            {"id": 14, "name": "Celeritas"},
+            {"id": 15, "name": "Magneta"},
+            {"id": 16, "name": "RubberMan"},
+            {"id": 17, "name": "Dynama"},
+            {"id": 18, "name": "Dr IQ"},
+            {"id": 19, "name": "Magma"},
+            {"id": 20, "name": "Tornado"}
+        ];
+    };
+
+    HeroService.prototype.getHeroes = function () {
+        return this.heroes;
     };
 
     var MyName = ng.core
@@ -21,20 +40,22 @@
     var Footer = ng.core
         .Component({
             selector: 'footer',
-            template: '<br>'
+            providers: [HeroService],
+            template: '{{heroes}}<br><br>'
         })
         .Class({
-            constructor: function () {
-            }
+            constructor: [HeroService, function (service) {
+                this.heroes = service.getHeroes();
+            }]
         });
 
     var app = ng.core
         .Component({
             selector: 'my-app',
-            template: '<h1>Hello Angular 2!</h1>' +
+            directives: [Footer, MyName],
+            template: '<h1>Hello Angular 2 !!!</h1>' +
             '<footer></footer>' +
-            '<my-name></my-name>',
-            directives: [Footer, MyName]
+            '<my-name></my-name>'
         })
         .Class({
             constructor: function () {
