@@ -1,7 +1,8 @@
 (function () {
+    "use strict";
+
     var NameService = function () {
     };
-
     NameService.prototype.greeting = function () {
         return 'Eduard Tkachuk';
     };
@@ -57,12 +58,28 @@
             }]
         });
 
+    var Index = ng.core
+        .Component({
+            selector: 'index',
+            //directives: [RouterOutlet, RouterLink],
+            template: '<b>Index Component</b>'
+        })
+        .Class({
+            constructor: function () {
+            }
+        });
+
     var app = ng.core
         .Component({
             selector: 'my-app',
             directives: [Heroes, MyName],
             template: '<h1>Hello Angular 2 !!!</h1>' +
             '<heroes></heroes><br>' +
+                //'<ul>' +
+                //'<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
+                //'<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
+                //'</ul>' +
+            '<router-outlet></router-outlet>' +
             '<my-name></my-name>'
         })
         .Class({
