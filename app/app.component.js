@@ -58,6 +58,16 @@
             }]
         });
 
+    var Blank = ng.core
+        .Component({
+            selector: 'blank',
+            template: ''
+        })
+        .Class({
+            constructor: function () {
+            }
+        });
+
     var Index = ng.core
         .Component({
             selector: 'index',
@@ -96,18 +106,15 @@
         .Class({
             constructor: [ng.router.Router, function (router) {
                 router.config([
+                    {path: '/', component: Blank, name: 'Blank'},
                     {path: '/index', component: Index, name: 'Index'},
                     {path: '/home', component: Home, name: 'Home'}
                 ]);
                 this.onClick = function () {
-                    router.navigate(['Home']);
+                    router.navigate(['Blank']);
                 }
             }]
         });
-        //.Class({
-        //    constructor: function () {
-        //    }
-        //});
 
     document.addEventListener('DOMContentLoaded', function () {
         ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
