@@ -82,27 +82,32 @@
         .Component({
             selector: 'my-app',
             directives: [MyName, Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
-            template: '<h1>Hello Angular 2 !!!</h1>' +
-             '<heroes></heroes><br>' +
-            //'<ul>' +
-            //'<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
-            //'<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
-            //'</ul>' +
-            //'<x-router-outlet></x-router-outlet>' +
+            template: '<router-outlet></router-outlet>' +
+            '<div (click)="onClick(hero)">' +
+            '<h1>Hello Angular 2 !!!</h1>' +
+            '</div>' +
+            '<heroes></heroes><br>' +
+            '<ul>' +
+            '<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
+            '<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
+            '</ul>' +
             '<my-name></my-name>'
         })
-        //.Class({
-        //    constructor: [ng.router.Router, function (router) {
-        //        router.config([
-        //            {path: '/index', component: Index, name: 'Index'},
-        //            {path: '/home', component: Home, name: 'Home'}
-        //        ])
-        //    }]
-        //});
         .Class({
-            constructor: function () {
-            }
+            constructor: [ng.router.Router, function (router) {
+                router.config([
+                    {path: '/index', component: Index, name: 'Index'},
+                    {path: '/home', component: Home, name: 'Home'}
+                ]);
+                this.onClick = function () {
+                    router.navigate(['Home']);
+                }
+            }]
         });
+        //.Class({
+        //    constructor: function () {
+        //    }
+        //});
 
     document.addEventListener('DOMContentLoaded', function () {
         ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
