@@ -21,7 +21,6 @@
             {"id": 20, "name": "Tornado"}
         ];
     };
-
     HeroService.prototype.getHeroes = function () {
         return this.heroes;
     };
