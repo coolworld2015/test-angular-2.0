@@ -1,11 +1,9 @@
-//cd Downloads\AJOB\AngularJS\Total
-//node server.js
 //npm install node-static
 //node server.js
 
 var static = require('node-static');
 
-var file = new static.Server('.');
+var file = new static.Server('./build');
 
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {

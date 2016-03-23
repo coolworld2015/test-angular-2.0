@@ -1,9 +1,11 @@
 {
   "scripts": {
+    "postinstall": "npm run watch",
     "release": "gulp release",
     "watch": "gulp watch"
   },
   "dependencies": {
+	"node-static": "^0.7.7",
     "gulp": "^3.8.11",
     "gulp-angular-templatecache": "^1.6.0",
     "gulp-concat": "^2.5.2",
