@@ -49,10 +49,11 @@
             '</table>'
         })
         .Class({
-            constructor: [HeroService, function (service) {
+            constructor: [HeroService, ng.router.Router, function (service, router) {
                 this.heroes = service.getHeroes();
                 this.onClick = function (hero) {
                     console.log(hero.name);
+                    router.navigate(['HeroDetail', {name: hero.name}]);
                 }
             }]
         });
@@ -87,6 +88,17 @@
             }
         });
 
+    var HeroDetail = ng.core
+        .Component({
+            selector: 'hero',
+            template: '<b>Name: {{name}}</b>'
+        })
+        .Class({
+            constructor: [ng.router.RouteParams, function (routeParams) {
+                this.name = routeParams.get('name');
+            }]
+        });
+
     var app = ng.core
         .Component({
             selector: 'my-app',
@@ -107,7 +119,8 @@
                 router.config([
                     {path: '/', component: Blank, name: 'Blank'},
                     {path: '/index', component: Index, name: 'Index'},
-                    {path: '/home', component: Home, name: 'Home'}
+                    {path: '/home', component: Home, name: 'Home'},
+                    {path: '/hero/', component: HeroDetail, name: 'HeroDetail'}
                 ]);
                 this.onClick = function () {
                     router.navigate(['Blank']);
