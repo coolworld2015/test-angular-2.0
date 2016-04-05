@@ -51,22 +51,9 @@
         })
         .Class({
             constructor: [HeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
-                var that = this;
-                this.onClick = function () {
-                    http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
-                        .map(function (res) {
-                            return res.json();
-                        })
-                        .subscribe(function (clients) {
-                            return that.heroes = clients.slice(0, 6);
-                            //that.clients = clients[0].name;
-                            //that.clients = clients;
-                        })
-                };
-
                 this.heroes = service.getHeroes();
 
-                this.onClick1 = function (hero) {
+                this.onClick = function (hero) {
                     console.log(hero.name);
                     router.navigate(['HeroDetail', {name: hero.name}]);
                 };
@@ -114,20 +101,52 @@
             }]
         });
 
+    var Clients = ng.core
+        .Component({
+            selector: 'clients',
+            providers: [ng.http.HTTP_PROVIDERS],
+            template: '<table>' +
+            '<tr *ngFor="#client of clients" (click)="onClick(hero)">' +
+            '<td>{{client.id}}</td>' +
+            '<td>{{client.name}}</td>' +
+            '</tr>' +
+            '</table>' +
+            '<br>' +
+            '<div *ngIf="show">' +
+            'Loading ...' +
+            '</div>'
+        })
+        .Class({
+            constructor: [ng.router.Router, ng.http.Http, function (router, http) {
+                var that = this;
+                this.show = true;
+                http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
+                    .map(function (res) {
+                        return res.json();
+                    })
+                    .subscribe(function (clients) {
+                        that.clients = clients.slice(0, 6);
+                        that.show = false;
+                    })
+            }]
+        });
+
     var app = ng.core
         .Component({
             selector: 'my-app',
             directives: [MyName, Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
-            template: '<router-outlet></router-outlet>' +
+            template: '' +
             '<div (click)="onClick(hero)">' +
             '<h1>Hello Angular 2 !!!</h1>' +
             '</div>' +
-            '<heroes></heroes><br>' +
             '<ul>' +
             '<li><a [routerLink]="[\'./Index\']">Index Page</a></li>' +
             '<li><a [routerLink]="[\'./Home\']">Home Page</a></li>' +
+            '<li><a [routerLink]="[\'./Clients\']">Clients</a></li>' +
+            '<li><a [routerLink]="[\'./Heroes\']">Heroes</a></li>' +
             '</ul>' +
-            '<my-name></my-name>'
+            //'<my-name></my-name>' +
+            '<router-outlet></router-outlet>'
         })
         .Class({
             constructor: [ng.router.Router, function (router) {
@@ -135,6 +154,8 @@
                     {path: '/', component: Blank, name: 'Blank'},
                     {path: '/index', component: Index, name: 'Index'},
                     {path: '/home', component: Home, name: 'Home'},
+                    {path: '/clients', component: Clients, name: 'Clients'},
+                    {path: '/heroes', component: Heroes, name: 'Heroes'},
                     {path: '/hero/', component: HeroDetail, name: 'HeroDetail'}
                 ]);
                 this.onClick = function () {
