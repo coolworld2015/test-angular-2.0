@@ -58,7 +58,7 @@
                             return res.json();
                         })
                         .subscribe(function (clients) {
-                            return that.clients = clients.slice(0, 6);
+                            return that.heroes = clients.slice(0, 6);
                             //that.clients = clients[0].name;
                             //that.clients = clients;
                         })
