@@ -40,21 +40,36 @@
     var Heroes = ng.core
         .Component({
             selector: 'heroes',
-            providers: [HeroService],
+            providers: [HeroService, ng.http.HTTP_PROVIDERS],
             template: '<table>' +
             '<tr *ngFor="#hero of heroes" (click)="onClick(hero)">' +
             '<td>{{hero.id}}</td>' +
             '<td>{{hero.name}}</td>' +
             '</tr>' +
-            '</table>'
+            '</table>' +
+            '{{clients}} '
         })
         .Class({
-            constructor: [HeroService, ng.router.Router, function (service, router) {
+            constructor: [HeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
+                var that = this;
+                this.onClick = function () {
+                    http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
+                        .map(function (res) {
+                            return res.json();
+                        })
+                        .subscribe(function (clients) {
+                            return that.clients = clients.slice(0, 6);
+                            //that.clients = clients[0].name;
+                            //that.clients = clients;
+                        })
+                };
+
                 this.heroes = service.getHeroes();
-                this.onClick = function (hero) {
+
+                this.onClick1 = function (hero) {
                     console.log(hero.name);
                     router.navigate(['HeroDetail', {name: hero.name}]);
-                }
+                };
             }]
         });
 

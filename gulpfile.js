@@ -9,7 +9,10 @@ var templateCache = require('gulp-angular-templatecache');
 var scripts = [
     './app/vendors/angular2-polyfills.min.js',
     './app/vendors/Rx.umd.min.js',
+    './app/vendors/es6-shim.js',
+    './app/vendors/system.js',
     './app/vendors/angular2-all.umd.js',
+    './app/vendors/http.dev.js',
 
     './app/src/**/!(*.spec).js'
 ];
