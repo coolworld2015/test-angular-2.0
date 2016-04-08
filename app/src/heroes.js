@@ -28,8 +28,7 @@
             '<td>{{hero.id}}</td>' +
             '<td>{{hero.name}}</td>' +
             '</tr>' +
-            '</table>' +
-            '{{clients}} '
+            '</table>'
         })
         .Class({
             constructor: [app.HeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
