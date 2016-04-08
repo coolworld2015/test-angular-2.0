@@ -1,11 +1,11 @@
 (function (app) {
     "use strict";
 
-    app.AppNameService = function () {
-    };
-    app.AppNameService.prototype.greeting = function () {
-        return 'CoolWorld';
-    };
+    //app.AppNameService = function () {
+    //};
+    //app.AppNameService.prototype.greeting = function () {
+    //    return 'CoolWorld1';
+    //};
 
     app.HeroService = function () {
         this.heroes = [
@@ -25,17 +25,17 @@
         return this.heroes;
     };
 
-    app.MyName = ng.core
-        .Component({
-            selector: 'my-name',
-            providers: [app.AppNameService],
-            template: '<div>{{greeting}}</div>'
-        })
-        .Class({
-            constructor: [app.AppNameService, function (service) {
-                this.greeting = service.greeting();
-            }]
-        });
+    //app.CopyRight = ng.core
+    //    .Component({
+    //        selector: 'copy-right',
+    //        providers: [app.AppNameService],
+    //        template: '<div>{{greeting}}</div>'
+    //    })
+    //    .Class({
+    //        constructor: [app.AppNameService, function (service) {
+    //            this.greeting = service.greeting();
+    //        }]
+    //    });
 
     app.Heroes = ng.core
         .Component({
@@ -63,7 +63,7 @@
     app.main = ng.core
         .Component({
             selector: 'my-app',
-            directives: [app.MyName, app.Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
+            directives: [app.CopyRight, app.Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
             template: '' +
             '<div (click)="onClick(hero)">' +
             '<h1>Hello Angular 2 !!!</h1>' +
@@ -74,7 +74,7 @@
             '<li><a [routerLink]="[\'./Clients\']">Clients</a></li>' +
             '<li><a [routerLink]="[\'./Heroes\']">Heroes</a></li>' +
             '</ul>' +
-            '<my-name></my-name>' +
+            '<copy-right></copy-right>' +
             '<router-outlet></router-outlet>'
         })
         .Class({
