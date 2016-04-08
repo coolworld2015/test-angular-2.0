@@ -14,9 +14,10 @@
         {"id": 20, "name": "Tornado"}
     ];
 
-    app.HeroService = ng.core
+    app.HeroService1 = ng.core
         .Class({
             constructor: function () {
+                console.log('HeroService');
             },
 
             getHeroes: function () {
