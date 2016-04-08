@@ -1,4 +1,4 @@
-(function () {
+(function (app) {
     "use strict";
 
     var NameService = function () {
@@ -25,7 +25,7 @@
         return this.heroes;
     };
 
-    var MyName = ng.core
+    app.AppMyName = ng.core
         .Component({
             selector: 'my-name',
             providers: [NameService],
@@ -37,7 +37,7 @@
             }]
         });
 
-    var Heroes = ng.core
+    app.AppHeroes = ng.core
         .Component({
             selector: 'heroes',
             providers: [HeroService, ng.http.HTTP_PROVIDERS],
@@ -60,7 +60,7 @@
             }]
         });
 
-    var Blank = ng.core
+    app.AppBlank = ng.core
         .Component({
             selector: 'blank',
             template: ''
@@ -70,7 +70,7 @@
             }
         });
 
-    var Index = ng.core
+    app.AppIndex = ng.core
         .Component({
             selector: 'index',
             template: '<b>Index Component</b>'
@@ -80,7 +80,7 @@
             }
         });
 
-    var Home = ng.core
+    app.AppHome = ng.core
         .Component({
             selector: 'home',
             template: '<b>Home Component</b>'
@@ -90,7 +90,7 @@
             }
         });
 
-    var HeroDetail = ng.core
+    app.AppHeroDetail = ng.core
         .Component({
             selector: 'hero',
             template: '<b>Name: {{name}}</b>'
@@ -101,7 +101,7 @@
             }]
         });
 
-    var Clients = ng.core
+    app.AppClients = ng.core
         .Component({
             selector: 'clients',
             providers: [ng.http.HTTP_PROVIDERS],
@@ -131,10 +131,10 @@
             }]
         });
 
-    var app = ng.core
+    app.AppComponent = ng.core
         .Component({
             selector: 'my-app',
-            directives: [MyName, Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
+            directives: [app.AppMyName, app.AppHeroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
             template: '' +
             '<div (click)="onClick(hero)">' +
             '<h1>Hello Angular 2 !!!</h1>' +
@@ -145,18 +145,18 @@
             '<li><a [routerLink]="[\'./Clients\']">Clients</a></li>' +
             '<li><a [routerLink]="[\'./Heroes\']">Heroes</a></li>' +
             '</ul>' +
-            //'<my-name></my-name>' +
+                //'<my-name></my-name>' +
             '<router-outlet></router-outlet>'
         })
         .Class({
             constructor: [ng.router.Router, function (router) {
                 router.config([
-                    {path: '/', component: Blank, name: 'Blank'},
-                    {path: '/index', component: Index, name: 'Index'},
-                    {path: '/home', component: Home, name: 'Home'},
-                    {path: '/clients', component: Clients, name: 'Clients'},
-                    {path: '/heroes', component: Heroes, name: 'Heroes'},
-                    {path: '/hero/', component: HeroDetail, name: 'HeroDetail'}
+                    {path: '/', component: app.AppBlank, name: 'Blank'},
+                    {path: '/index', component: app.AppIndex, name: 'Index'},
+                    {path: '/home', component: app.AppHome, name: 'Home'},
+                    {path: '/clients', component: app.AppClients, name: 'Clients'},
+                    {path: '/heroes', component: app.AppHeroes, name: 'Heroes'},
+                    {path: '/hero/', component: app.AppHeroDetail, name: 'HeroDetail'}
                 ]);
                 this.onClick = function () {
                     router.navigate(['Blank']);
@@ -164,7 +164,7 @@
             }]
         });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
-    });
-})();
+    //document.addEventListener('DOMContentLoaded', function () {
+    //    ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
+    //});
+})(window.app || (window.app = {}));
