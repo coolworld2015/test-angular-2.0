@@ -1,38 +1,38 @@
 (function (app) {
     "use strict";
 
-    var NameService = function () {
+    app.AppNameService = function () {
     };
-    NameService.prototype.greeting = function () {
-        return 'Eduard Tkachuk';
+    app.AppNameService.prototype.greeting = function () {
+        return 'CoolWorld';
     };
 
-    var HeroService = function () {
-        this.heroes = [
-            {"id": 11, "name": "Mr. Nice"},
-            {"id": 12, "name": "Narco"},
-            {"id": 13, "name": "Bombasto"},
-            {"id": 14, "name": "Celeritas"},
-            {"id": 15, "name": "Magneta"},
-            {"id": 16, "name": "RubberMan"},
-            {"id": 17, "name": "Dynama"},
-            {"id": 18, "name": "Dr IQ"},
-            {"id": 19, "name": "Magma"},
-            {"id": 20, "name": "Tornado"}
-        ];
-    };
-    HeroService.prototype.getHeroes = function () {
-        return this.heroes;
-    };
+    //app.AppHeroService = function () {
+    //    this.heroes = [
+    //        {"id": 11, "name": "Mr. Nice"},
+    //        {"id": 12, "name": "Narco"},
+    //        {"id": 13, "name": "Bombasto"},
+    //        {"id": 14, "name": "Celeritas"},
+    //        {"id": 15, "name": "Magneta"},
+    //        {"id": 16, "name": "RubberMan"},
+    //        {"id": 17, "name": "Dynama"},
+    //        {"id": 18, "name": "Dr IQ"},
+    //        {"id": 19, "name": "Magma"},
+    //        {"id": 20, "name": "Tornado"}
+    //    ];
+    //};
+    //app.AppHeroService.prototype.getHeroes = function () {
+    //    return this.heroes;
+    //};
 
     app.AppMyName = ng.core
         .Component({
             selector: 'my-name',
-            providers: [NameService],
+            providers: [app.AppNameService],
             template: '<div>{{greeting}}</div>'
         })
         .Class({
-            constructor: [NameService, function (service) {
+            constructor: [app.AppNameService, function (service) {
                 this.greeting = service.greeting();
             }]
         });
@@ -40,7 +40,7 @@
     app.AppHeroes = ng.core
         .Component({
             selector: 'heroes',
-            providers: [HeroService, ng.http.HTTP_PROVIDERS],
+            providers: [app.AppHeroService, ng.http.HTTP_PROVIDERS],
             template: '<table>' +
             '<tr *ngFor="#hero of heroes" (click)="onClick(hero)">' +
             '<td>{{hero.id}}</td>' +
@@ -50,7 +50,7 @@
             '{{clients}} '
         })
         .Class({
-            constructor: [HeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
+            constructor: [app.AppHeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
                 this.heroes = service.getHeroes();
 
                 this.onClick = function (hero) {
@@ -101,35 +101,35 @@
             }]
         });
 
-    app.AppClients = ng.core
-        .Component({
-            selector: 'clients',
-            providers: [ng.http.HTTP_PROVIDERS],
-            template: '<table>' +
-            '<tr *ngFor="#client of clients" (click)="onClick(hero)">' +
-            '<td>{{client.id}}</td>' +
-            '<td>{{client.name}}</td>' +
-            '</tr>' +
-            '</table>' +
-            '<br>' +
-            '<div *ngIf="show">' +
-            'Loading ...' +
-            '</div>'
-        })
-        .Class({
-            constructor: [ng.router.Router, ng.http.Http, function (router, http) {
-                var that = this;
-                this.show = true;
-                http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
-                    .map(function (res) {
-                        return res.json();
-                    })
-                    .subscribe(function (clients) {
-                        that.clients = clients.slice(0, 6);
-                        that.show = false;
-                    })
-            }]
-        });
+    //app.AppClients = ng.core
+    //    .Component({
+    //        selector: 'clients',
+    //        providers: [ng.http.HTTP_PROVIDERS],
+    //        template: '<table>' +
+    //        '<tr *ngFor="#client of clients" (click)="onClick(hero)">' +
+    //        '<td>{{client.id}}</td>' +
+    //        '<td>{{client.name}}</td>' +
+    //        '</tr>' +
+    //        '</table>' +
+    //        '<br>' +
+    //        '<div *ngIf="show">' +
+    //        'Loading ...' +
+    //        '</div>'
+    //    })
+    //    .Class({
+    //        constructor: [ng.router.Router, ng.http.Http, function (router, http) {
+    //            var that = this;
+    //            this.show = true;
+    //            http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
+    //                .map(function (res) {
+    //                    return res.json();
+    //                })
+    //                .subscribe(function (clients) {
+    //                    that.clients = clients.slice(0, 6);
+    //                    that.show = false;
+    //                })
+    //        }]
+    //    });
 
     app.AppComponent = ng.core
         .Component({
@@ -145,7 +145,7 @@
             '<li><a [routerLink]="[\'./Clients\']">Clients</a></li>' +
             '<li><a [routerLink]="[\'./Heroes\']">Heroes</a></li>' +
             '</ul>' +
-                //'<my-name></my-name>' +
+            '<my-name></my-name>' +
             '<router-outlet></router-outlet>'
         })
         .Class({
@@ -154,7 +154,7 @@
                     {path: '/', component: app.AppBlank, name: 'Blank'},
                     {path: '/index', component: app.AppIndex, name: 'Index'},
                     {path: '/home', component: app.AppHome, name: 'Home'},
-                    {path: '/clients', component: app.AppClients, name: 'Clients'},
+                    {path: '/clients', component: app.Clients, name: 'Clients'},
                     {path: '/heroes', component: app.AppHeroes, name: 'Heroes'},
                     {path: '/hero/', component: app.AppHeroDetail, name: 'HeroDetail'}
                 ]);
@@ -167,4 +167,5 @@
     //document.addEventListener('DOMContentLoaded', function () {
     //    ng.platform.browser.bootstrap(app, [ng.router.ROUTER_PROVIDERS]);
     //});
+
 })(window.app || (window.app = {}));
