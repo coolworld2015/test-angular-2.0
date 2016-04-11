@@ -17,7 +17,7 @@
             '</div>'
         })
         .Class({
-            constructor: [ng.router.Router, ng.http.Http, function (router, http) {
+            constructor: [ng.http.Http, function (http) {
                 var that = this;
                 this.show = true;
                 http.get('http://ui-warehouse.herokuapp.com/api/clients/get')
