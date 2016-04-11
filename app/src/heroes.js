@@ -15,7 +15,7 @@
     app.Heroes = ng.core
         .Component({
             selector: 'heroes',
-            providers: [app.HeroService, ng.http.HTTP_PROVIDERS],
+            providers: [app.HeroService],
             template: '<table>' +
             '<tr *ngFor="#hero of heroes" (click)="onClick(hero)">' +
             '<td>{{hero.id}}</td>' +
