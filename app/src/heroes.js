@@ -1,23 +1,16 @@
 (function (app) {
     "use strict";
 
-    app.HeroService = function () {
-        this.heroes = [
-            {"id": 11, "name": "Mr. Nice"},
-            {"id": 12, "name": "Narco"},
-            {"id": 13, "name": "Bombasto"},
-            {"id": 14, "name": "Celeritas"},
-            {"id": 15, "name": "Magneta"},
-            {"id": 16, "name": "RubberMan"},
-            {"id": 17, "name": "Dynama"},
-            {"id": 18, "name": "Dr IQ"},
-            {"id": 19, "name": "Magma"},
-            {"id": 20, "name": "Tornado"}
-        ];
-    };
-    app.HeroService.prototype.getHeroes = function () {
-        return this.heroes;
-    };
+    app.HeroService = ng.core
+        .Class({
+            constructor: function () {
+                console.log('HeroService');
+            },
+
+            getHeroes: function () {
+                return app.HEROES;
+            }
+        });
 
     app.Heroes = ng.core
         .Component({
@@ -31,7 +24,7 @@
             '</table>'
         })
         .Class({
-            constructor: [app.HeroService, ng.router.Router, ng.http.Http, function (service, router, http) {
+            constructor: [app.HeroService, ng.router.Router, function (service, router) {
                 this.heroes = service.getHeroes();
 
                 this.onClick = function (hero) {

@@ -2,7 +2,7 @@
     "use strict";
 
     app.HEROES = [
-        {"id": 11, "name": "Mr. Nice"},
+        {"id": 11, "name": "Mr. Nice1"},
         {"id": 12, "name": "Narco"},
         {"id": 13, "name": "Bombasto"},
         {"id": 14, "name": "Celeritas"},
@@ -13,16 +13,5 @@
         {"id": 19, "name": "Magma"},
         {"id": 20, "name": "Tornado"}
     ];
-
-    app.HeroService1 = ng.core
-        .Class({
-            constructor: function () {
-                console.log('HeroService');
-            },
-
-            getHeroes: function () {
-                return app.HEROES;
-            }
-        });
 
 })(window.app || (window.app = {}));

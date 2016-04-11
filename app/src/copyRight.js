@@ -1,11 +1,16 @@
 (function (app) {
     "use strict";
 
-    app.AppNameService = function () {
-    };
-    app.AppNameService.prototype.greeting = function () {
-        return 'CoolWorld';
-    };
+    app.AppNameService = ng.core
+        .Class({
+            constructor: function () {
+                console.log('AppNameService');
+            },
+
+            greeting: function () {
+                return 'CoolWorld';
+            }
+        });
 
     app.CopyRight = ng.core
         .Component({
