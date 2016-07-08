@@ -28,7 +28,8 @@
                     {path: '/home', component: app.Home, name: 'Home'},
                     {path: '/clients', component: app.Clients, name: 'Clients'},
                     {path: '/heroes', component: app.Heroes, name: 'Heroes'},
-                    {path: '/hero/', component: app.HeroDetail, name: 'HeroDetail'}
+                    {path: '/hero/', component: app.HeroDetail, name: 'HeroDetail'},
+                    {path: '/client/', component: app.ClientDetail, name: 'ClientDetail'}
                 ]);
                 this.onClick = function () {
                     router.navigate(['Blank']);
