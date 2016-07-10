@@ -5,7 +5,7 @@
 
     app.main = ng.core
         .Component({
-            selector: 'my-app',
+            selector: 'app',
             directives: [app.CopyRight, app.Heroes, ng.router.ROUTER_DIRECTIVES, ng.router.RouterLink, ng.router.RouterOutlet],
             template: '' +
             '<div (click)="onClick(hero)">' +
@@ -29,7 +29,7 @@
                     {path: '/clients', component: app.Clients, name: 'Clients'},
                     {path: '/heroes', component: app.Heroes, name: 'Heroes'},
                     {path: '/hero/', component: app.HeroDetail, name: 'HeroDetail'},
-                    {path: '/client/', component: app.ClientDetail, name: 'ClientDetail'}
+                    {path: '/clientDetails/', component: app.ClientDetails, name: 'ClientDetails'}
                 ]);
                 this.onClick = function () {
                     router.navigate(['Blank']);

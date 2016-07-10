@@ -30,8 +30,15 @@
                     })
 					
                 this.onClick = function (client) {
-                    console.log(client.name);
-                    router.navigate(['ClientDetail', {name: client.name}]);
+                    console.log(client);
+                    router.navigate(['ClientDetails', {
+							id: client.id,
+							name: client.name,
+							address: client.address,
+							phone: client.phone,
+							cv: client.cv,
+							description: client.description
+						}]);
                 };
             }]
         });
