@@ -1,14 +1,14 @@
 (function (app) {
     "use strict";
 
-    app.AppNameService1 = ng.core
+    app.AppNameService = ng.core
         .Class({
             constructor: function () {
-                console.log('AppNameService1');
+                console.log('AppNameService');
             },
 
             greeting: function () {
-                return 'CoolWorld1';
+                return 'CoolWorld';
             }
         });
 

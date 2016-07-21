@@ -14,6 +14,7 @@ var scripts = [
     './app/vendors/angular2-all.umd.js',
     './app/vendors/http.dev.js',
 
+    './app/src/nameService.js',
     './app/src/**/!(*.spec).js'
 ];
 
