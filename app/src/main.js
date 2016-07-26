@@ -29,7 +29,7 @@
                     {path: '/clients', component: app.Clients, name: 'Clients'},
                     {path: '/heroes', component: app.Heroes, name: 'Heroes'},
                     {path: '/hero/', component: app.HeroDetail, name: 'HeroDetail'},
-                    {path: '/clientDetails/', component: app.ClientDetails, name: 'ClientDetails'}
+                    {path: '/client/:id', component: app.ClientDetails, name: 'ClientDetails'} //http://plnkr.co/edit/tUe5fb?p=preview
                 ]);
                 this.onClick = function () {
                     router.navigate(['Blank']);
